@@ -646,25 +646,8 @@ public partial class MainViewModel : ViewModelBase
 
                 var startInfo = new ProcessStartInfo();
                 startInfo.FileName = "python";
-                startInfo.ArgumentList.Add(WWiserPath);
-                startInfo.ArgumentList.Add(Path.Combine(banksDir, "**/*.bnk"));
-                startInfo.ArgumentList.Add("-g");
-                startInfo.ArgumentList.Add("-te");
-                if (!AllowBanks)
-                {
-                    startInfo.ArgumentList.Add("-gbs");
-                }
-                if (AllowDupes)
-                {
-                    startInfo.ArgumentList.Add("-gd");
-                    startInfo.ArgumentList.Add("-gde");
-                }
-                startInfo.ArgumentList.Add("-nl");
-                startInfo.ArgumentList.Add(EventPath);
-                startInfo.ArgumentList.Add("-gl");
-                startInfo.ArgumentList.Add(folder.Name);
-                startInfo.ArgumentList.Add("-go");
-                startInfo.ArgumentList.Add(Path.GetRelativePath(outputDir, txtpDir));
+                startInfo.Arguments = string.Join(' ', new string[] { WWiserPath, Path.Combine(tempDir, "**/*.bnk"), "-g", "-gbs", "-te", "-nl", EventPath, "-gl", folder.Name, "-go", Path.GetRelativePath(outputDir, txtpDir) });
+               
                 startInfo.WorkingDirectory = outputDir;
                 startInfo.UseShellExecute = true;
                 using var process = Process.Start(startInfo);
@@ -684,21 +667,8 @@ public partial class MainViewModel : ViewModelBase
 
             var startInfo = new ProcessStartInfo();
             startInfo.FileName = "python";
-            startInfo.ArgumentList.Add(WWiserPath);
-            startInfo.ArgumentList.Add(Path.Combine(banksDir, "**/*.bnk"));
-            startInfo.ArgumentList.Add("-g");
-            startInfo.ArgumentList.Add("-te");
-            if (!AllowBanks)
-            {
-                startInfo.ArgumentList.Add("-gbs");
-            }
-            if (AllowDupes)
-            {
-                startInfo.ArgumentList.Add("-gd");
-                startInfo.ArgumentList.Add("-gde");
-            }
-            startInfo.ArgumentList.Add("-nl");
-            startInfo.ArgumentList.Add(EventPath);
+            startInfo.Arguments = string.Join(' ', new string[] { WWiserPath, Path.Combine(banksDir, "**/*.bnk"), "-g", "-gbs", "-te", "-nl", EventPath });
+
             startInfo.WorkingDirectory = outputDir;
             startInfo.UseShellExecute = true;
             using var process = Process.Start(startInfo);
