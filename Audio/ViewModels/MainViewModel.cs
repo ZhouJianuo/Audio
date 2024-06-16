@@ -646,7 +646,7 @@ public partial class MainViewModel : ViewModelBase
 
                 var startInfo = new ProcessStartInfo();
                 startInfo.FileName = "python";
-                startInfo.Arguments = string.Join(' ', new string[] { WWiserPath, Path.Combine(tempDir, "**/*.bnk"), "-g", "-gbs", "-te", "-nl", EventPath, "-gl", folder.Name, "-go", Path.GetRelativePath(outputDir, txtpDir) });
+                startInfo.Arguments = string.Join(' ', new string[] { WWiserPath, Path.Combine(banksDir, "**/*.bnk"), "-g", "-gbs", "-te", "-nl", EventPath, "-gl", folder.Name, "-go", Path.GetRelativePath(outputDir, txtpDir) });
                
                 startInfo.WorkingDirectory = outputDir;
                 startInfo.UseShellExecute = true;
